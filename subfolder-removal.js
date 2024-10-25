@@ -1,13 +1,11 @@
 const removeSubfolders = function(folder){
 
-    let ds = {};
-    let t = ds;
+    let ds = {}, t = ds;
     let result = [];
     
     for (let i1 = 0, l1 = folder.length; i1 < l1; i1++) {
 
-        const path = folder[i1].split("/");
-        path.shift();
+        const path = folder[i1].split("/").shift();
 
         for (let j1 = 0, l2 = path.length; j1 < l2; j1++) {
 
@@ -36,5 +34,5 @@ const removeSubfolders = function(folder){
 
     dig(ds, "");
 
-    return result;
+    return [...new Set(result)];
 }
