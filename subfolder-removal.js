@@ -1,11 +1,14 @@
 const removeSubfolders = function(folder){
 
-    let ds = {}, t = ds;
-    let result = [];
+    const ds = {};
+    const search = {};
+    let t = ds, result = [];
     
     for (let i1 = 0, l1 = folder.length; i1 < l1; i1++) {
 
-        const path = folder[i1].split("/").shift();
+        search[folder[i1]] = true;
+        const path = folder[i1].split("/");
+        path.shift();
 
         for (let j1 = 0, l2 = path.length; j1 < l2; j1++) {
 
@@ -23,9 +26,10 @@ const removeSubfolders = function(folder){
 
         for (let key in node) {
         
-            if (folder.includes(word)) {
+            if (search[word]) {
                 delete node[key];
                 result.push(word);
+                return;
             }
 
             if (key != "last") dig(node[key], word + "/" + key);
